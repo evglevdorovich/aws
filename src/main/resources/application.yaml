@@ -1,0 +1,6 @@
+aws:
+  accessKey: accessKey
+  secretKey: secretKey
+product:
+  bucketName: dev-useast1-example
+  objectName: products.json
