@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="../static/style.css" th:href="style.css">
+    <title>Checkout</title>
+</head>
+<body>
+<div th:switch="${#lists.size(orders)}">
+    <span th:case="'0'">You don't have any orders</span>
+    <div th:case="*">
+        <div th:each="order : ${orders}">
+            <table class="shoppingCartTable">
+                <tr class="shoppingCartTableRow">
+                    <th>id</th>
+                    <th>orderStatus</th>
+                    <th>totalAmount</th>
+                    <th>shippingAddress</th>
+                    <th>createdDate</th>
+                </tr>
+                <tr class="shoppingCartTableRow">
+                    <td th:text="${order.id}"></td>
+                    <td th:text="${order.orderStatus}"></td>
+                    <td th:text="${order.totalAmount}"></td>
+                    <td th:text="${order.shippingAddress}"></td>
+                    <td th:text="${order.createdDate}"></td>
+                </tr>
+            </table>
+            <hr/>
+            <table class="shoppingCartTable" th:each="selectedProductList : ${order.selectedProductList}" style="margin-bottom: 10px;">
+                <tr class="shoppingCartTableRow">
+                    <th>orderId</th>
+                    <th>product title</th>
+                    <th>amount</th>
+                </tr>
+                <tr class="shoppingCartTableRow">
+                    <td th:text="${order.id}"></td>
+                    <td th:text="${selectedProductList.product.title}"></td>
+                    <td th:text="${selectedProductList.quantity}"></td>
+                </tr>
+            </table>
+            <hr/>
+        </div>
+    </div>
+    <h2><a th:href="@{/products}">Go to products</a></h2>
+</div>
+</body>
+</html>

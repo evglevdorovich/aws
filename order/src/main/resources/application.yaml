@@ -1,0 +1,64 @@
+s3:
+  bucketName: dev-useast1-example
+  objectName: products.json
+queue:
+  replaceNotifier:
+    name: productsReplaceNotifier
+    waitTimeSeconds: 0
+    maxNumberOfMessages: 5
+  orderProcessing:
+    name: EventResultListener.fifo
+    waitTimeSeconds: 5
+    maxNumberOfMessages: 5
+
+mail:
+  topic:
+    arn: arn:aws:sns:us-east-1:288453301076:MyTopic
+
+notificationService:
+  payments:
+    topicArn: "arn:aws:sns:us-east-1:288453301076:PaymentTopic.fifo"
+  warehouse:
+    topicArn: "arn:aws:sns:us-east-1:288453301076:WarehouseTopic.fifo"
+
+warehouse:
+  productTypeLimit: 12
+
+db:
+  order:
+    tableName: Order
+    partitionKey: id
+    warehouseStatusAttributeName: warehouseStatus
+    paymentStatusAttributeName: paymentStatus
+    userIdIndex: userId-index
+
+logging:
+  level:
+    org:
+      springframework:
+        web: INFO
+
+postfix:
+  payment:
+    deposit: _deposit
+    cancel: _cancel
+    receipt: _payment
+  warehouse:
+    deposit: _deposit
+    cancel: _cancel
+    withdrawal: _withdrawal
+
+spring:
+#  datasource:
+#    url: some
+#    username: postgres
+#    password: password
+  jpa:
+    show-sql: true
+#    hibernate:
+#      ddl-auto: create
+    properties:
+      hibernate:
+        format_sql: true
+
+sourceAttributeName: source

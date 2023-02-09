@@ -1,0 +1,15 @@
+databaseChangeLog:
+  - changeSet:
+      id: 2023-02-14--warehouse_product
+      author: evglevdorovich
+      context: v1.0
+      runOnChange: true
+      loadUpdateData:
+        primaryKey: id
+        file: data/data/2023-02-14--users.csv
+        relativeToChangelogFile: true
+        separator: ;
+        quotChar: '"'
+        seperator: ';'
+        encoding: UTF-8
+        tableName: users

@@ -1,0 +1,29 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="../static/style.css" th:href = "style.css">
+    <title>Products</title>
+</head>
+<body>
+    <h1 class="shopName">Shop</h1>
+    <a th:href="@{/logout}" style="margin-left: 95%">
+        <img th:src="@{images/logout.png}" width="40px"/>
+    </a>
+    <h2><a th:href="@{/shoppingCarts}">Go to shopping Cart</a></h2>
+    <h2 class="productListsTitle">List of products</h2>
+    <div th:each="product : ${products}" class="productItem">
+        <div th:text="${product.getTitle}">title</div>
+        <img th:src="${product.photoUrl}" width="500px" alt="photo of product"/>
+        <br/>
+        <span th:text="${product.price}"></span><span>$</span>
+        <div th:text="${product.tags}"></div>
+        <button type="submit" th:onclick="sendProductToShoppingCart([[${product}]])">Purchase</button>
+        <hr/>
+    </div>
+</body>
+<script src="../static/index.js" th:src="index.js" th:inline="javascript"></script>
+</html>
