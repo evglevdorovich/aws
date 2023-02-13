@@ -1,14 +1,16 @@
 package com.example.awsshop.model;
 
-//import jakarta.persistence.Embeddable;
-
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+@Data
 @AllArgsConstructor
 @NoArgsConstructor
-@Data
-public class Photo {
-    private String photoUrl;
+public class UserDto {
+
+    private String username;
+    private String password;
+    private String errorMessage;
+
 }

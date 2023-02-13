@@ -1,6 +1,24 @@
 aws:
-  accessKey: accessKey
-  secretKey: secretKey
-product:
+
+
+products:
   bucketName: dev-useast1-example
   objectName: products.json
+  file:
+    path: /products/products.json
+    folder: products
+
+logging:
+  level:
+    org:
+      springframework:
+        web: TRACE
+
+spring:
+  datasource:
+    url: jdbc:h2:mem:mydb
+    username: sa
+    password:
+    driverClassName: org.h2.Driver
+  jpa:
+    spring.jpa.database-platform: org.hibernate.dialect.H2Dialect
