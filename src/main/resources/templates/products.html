@@ -13,6 +13,7 @@
     <a th:href="@{/logout}" style="margin-left: 95%">
         <img th:src="@{images/logout.png}" width="40px"/>
     </a>
+    <h2><a th:href="@{/shoppingCarts}">Go to shopping Cart</a></h2>
     <h2 class="productListsTitle">List of products</h2>
     <div th:each="product : ${products}" class="productItem">
         <div th:text="${product.title}">title</div>

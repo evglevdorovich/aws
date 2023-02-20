@@ -1,6 +1,6 @@
 
 function sendProductToShoppingCart(product) {
-    console.log(product)
+
     fetch("/shoppingCarts/products", {
         method: "POST",
         headers: {'Content-Type': 'application/json'},
@@ -29,4 +29,37 @@ async function sendUser(form) {
     else {
         window.location.href = "http://localhost:8080/login"
     }
+}
+
+async function sendShippingCart(form) {
+    let formData = new FormData(form);
+    let shippingAddress;
+
+    formData.forEach(function(value){
+        shippingAddress = value;
+    });
+
+    await fetch("/shoppingCarts/shippingAddresses", {
+        method: "POST",
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify(shippingAddress)
+    })
+
+    window.location.href = "http://localhost:8080/shoppingCarts"
+}
+
+async function changeAmountOfProducts(inputId, productId) {
+    let input = document.getElementById(inputId);
+    console.log(input.value, productId)
+    const product = {
+        productId: productId,
+        changedAmount: input.value
+    }
+    await fetch("/warehouse", {
+        method: "PATCH",
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify(product)
+    });
+
+    window.location.href = "http://localhost:8080/warehouse"
 }

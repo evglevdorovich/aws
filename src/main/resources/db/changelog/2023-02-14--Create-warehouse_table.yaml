@@ -1,0 +1,21 @@
+databaseChangeLog:
+  - changeSet:
+      id: 2022-03-28--Create-warehouse_product_table
+      author: evglevdorovich
+      createTable:
+        tableName: warehouse_product
+        columns:
+          - column:
+              name: id
+              type: bigint
+              autoIncrement: true
+              constraints:
+                nullable: false
+                primaryKey: true
+                primaryKeyName: pk_warehouse
+          - column:
+              name: product_id
+              type: bigint
+          - column:
+              name: amount
+              type: bigint

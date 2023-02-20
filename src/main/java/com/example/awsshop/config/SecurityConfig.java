@@ -29,12 +29,14 @@ public class SecurityConfig {
                 .headers().frameOptions().disable()
                 .and()
                 .authorizeHttpRequests(req -> req
+                        .requestMatchers("/warehouse**")
+                        .hasRole("WAREHOUSE_MANAGER"))
+                .authorizeHttpRequests(req -> req
+                        .requestMatchers("/products**","/checkout**","/shoppingCarts**")
+                        .authenticated())
+                .authorizeHttpRequests(req -> req
                         .requestMatchers("/**")
                         .permitAll())
-                .authorizeHttpRequests((requests) -> requests
-                        .requestMatchers("/**")
-                        .authenticated()
-                )
                 .formLogin()
                 .defaultSuccessUrl("/products")
                 .and()

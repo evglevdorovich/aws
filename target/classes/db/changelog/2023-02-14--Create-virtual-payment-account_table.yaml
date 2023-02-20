@@ -1,0 +1,18 @@
+databaseChangeLog:
+  - changeSet:
+      id: 2023-02-14--Create-virtual-payment-account_table
+      author: evglevdorovich
+      createTable:
+        tableName: user_virtual_payment_account
+        columns:
+          - column:
+              name: id
+              type: bigint
+              autoIncrement: false
+              constraints:
+                nullable: false
+                primaryKey: true
+                primaryKeyName: pk_user_virtual_payment_account
+          - column:
+              name: amount_of_money
+              type: numeric

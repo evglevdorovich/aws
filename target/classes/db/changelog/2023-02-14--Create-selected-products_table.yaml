@@ -1,0 +1,40 @@
+databaseChangeLog:
+  - changeSet:
+      id: 2023-02-14--Create-selected-products_table
+      author: evglevdorovich
+      createTable:
+        tableName: selected_products
+        columns:
+          - column:
+              name: id
+              type: bigint
+              autoIncrement: true
+              constraints:
+                nullable: false
+                primaryKey: true
+                primaryKeyName: pk_selected_products
+          - column:
+              name: description
+              type: varchar(255)
+          - column:
+              name: price
+              type: varchar(255)
+          - column:
+              name: title
+              type: varchar(255)
+          - column:
+              name: quantity
+              type: bigint
+          - column:
+              name: order_id
+              type: bigint
+      changes:
+        - addForeignKeyConstraint:
+            baseColumnNames: order_id
+            baseTableName: selected_products
+            constraintName: fk_orders_selected_products
+            onDelete: CASCADE
+            onUpdate: CASCADE
+            referencedColumnNames: id
+            referencedTableName: orders
+            validate: true

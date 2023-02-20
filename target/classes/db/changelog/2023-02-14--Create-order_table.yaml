@@ -1,0 +1,33 @@
+databaseChangeLog:
+  - changeSet:
+      id: 2023-02-14--Create-orders_table
+      author: evglevdorovich
+      createTable:
+        tableName: orders
+        columns:
+          - column:
+              name: id
+              type: bigint
+              autoIncrement: true
+              constraints:
+                nullable: false
+                primaryKey: true
+                primaryKeyName: pk_orders
+          - column:
+              name: created_date
+              type: timestamp(6)
+          - column:
+              name: last_modified_date
+              type: timestamp(6)
+          - column:
+              name: order_status
+              type: varchar(100)
+          - column:
+              name: shipping_address
+              type: varchar(255)
+          - column:
+              name: total_amount
+              type: numeric(38,2)
+          - column:
+              name: user_id
+              type: bigint

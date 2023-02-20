@@ -1,0 +1,16 @@
+databaseChangeLog:
+  - include:
+      file: db/changelog/2023-02-14--Create-warehouse_table.yaml
+  - include:
+      file: db/changelog/2023-02-14--Create-user_table.yaml
+  - include:
+      file: db/changelog/2023-02-14--Create-order_table.yaml
+  - include:
+      file: db/changelog/2023-02-14--Create-selected-products_table.yaml
+  - include:
+      file: db/changelog/2023-02-14--Create-virtual-payment-account_table.yaml
+  - include:
+      file: db/changelog/data/2023-02-14--Add-warehouse.yaml
+  - include:
+      file: db/changelog/data/2023-02-14--Add-users.yaml
+

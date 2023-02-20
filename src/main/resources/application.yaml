@@ -1,7 +1,4 @@
-aws:
-
-
-products:
+product:
   bucketName: dev-useast1-example
   objectName: products.json
   file:
@@ -14,6 +11,7 @@ logging:
       springframework:
         web: TRACE
 
+
 spring:
   datasource:
     url: jdbc:h2:mem:mydb
@@ -21,4 +19,10 @@ spring:
     password:
     driverClassName: org.h2.Driver
   jpa:
+    show-sql: true
+#    hibernate:
+#      ddl-auto: create
     spring.jpa.database-platform: org.hibernate.dialect.H2Dialect
+    properties:
+      hibernate:
+        format_sql: true

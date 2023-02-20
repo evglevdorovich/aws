@@ -12,7 +12,7 @@
 
 .registration-form {
     text-align: center;
-    margin-top: 30%;
+    margin-top: 15%;
 }
 
 .errorMessage {
@@ -20,4 +20,13 @@
     text-align: center;
     margin: auto;
     font-size: 24px;
+}
+
+.shoppingCartTable {
+    border: 1px solid;
+    border-collapse: collapse;
+}
+
+.shoppingCartTableRow > td, th{
+    border: 1px solid;
 }
