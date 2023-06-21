@@ -7,6 +7,7 @@ import com.example.order.utils.PaymentObjectDtoExtractor;
 import com.example.order.utils.WarehouseObjectDtoExtractor;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
 @Controller
@@ -29,15 +30,12 @@ public class CheckoutController {
         return "redirect:/orders";
     }
 
-//
-//    @GetMapping("/orders")
-//    public String getOrders(Model model) {
-//        var principal = (ApplicationUser) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-//        var userDetails = userService.loadUserByUsername(principal.getUsername());
-//        var orders = orderService.findOrderByUserId(userDetails.getId());
-//        model.addAttribute("orders", orders);
-//        return "orders";
-//    }
 
+    @GetMapping("/orders")
+    public String getOrders(Model model) {
+        var orders = orderService.findOrdersByCurrentUser();
+        model.addAttribute("orders", orders);
+        return "orders";
+    }
 
 }

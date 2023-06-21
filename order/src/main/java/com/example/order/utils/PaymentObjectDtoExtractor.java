@@ -18,7 +18,6 @@ public class PaymentObjectDtoExtractor {
 
     public PaymentDto extractFromOrderForCancel(Order order){
         var paymentOrderId = paymentOrderIdReasonModifier.modifyForCancel(order.getId());
-        var amountToDiff = order.getTotalAmount().negate();
-        return new PaymentDto(paymentOrderId, order.getUserId(), amountToDiff);
+        return new PaymentDto(paymentOrderId, order.getUserId(), order.getTotalAmount());
     }
 }

@@ -42,14 +42,15 @@ public class WarehouseListener {
                 warehouseService.save(warehouseDto);
                 if (warehouseReasonChecker.isWithdrawal(warehouseDto)) {
                     warehouseEventDispatcher.dispatch(warehouseDto.getOrderId(), WarehouseEventStatus.SUCCESS);
-                    deleteMessage(queueUrl, message);
                 }
+                deleteMessage(queueUrl, message);
             } catch (Exception exception) {
                 if (warehouseReasonChecker.isWithdrawal(warehouseDto)) {
                     warehouseEventDispatcher.dispatch(warehouseDto.getOrderId(), WarehouseEventStatus.FAIL);
                     // not in finally - because if the exception will be thrown after dispatching it will delete the message from the queue
-                    deleteMessage(queueUrl, message);
                 }
+                deleteMessage(queueUrl, message);
+
             }
         }
     }

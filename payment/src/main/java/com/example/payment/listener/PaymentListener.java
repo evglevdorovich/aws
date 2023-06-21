@@ -48,11 +48,11 @@ public class PaymentListener {
                 if (reasonChecker.isReceipt(paymentAccountLog)) {
                     paymentEventDispatcher.dispatch(paymentAccountLog, PaymentStatus.SUCCESS);
                 }
+                deleteMessage(queueUrl, message);
             } catch (PaymentFailedException paymentFailedException) {
                 if (reasonChecker.isReceipt(paymentAccountLog)) {
                     paymentEventDispatcher.dispatch(paymentAccountLog, PaymentStatus.FAIL);
                 }
-            } finally {
                 deleteMessage(queueUrl, message);
             }
         }

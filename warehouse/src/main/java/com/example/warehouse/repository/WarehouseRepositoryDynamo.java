@@ -90,5 +90,4 @@ public class WarehouseRepositoryDynamo implements WarehouseRepository {
         return Key.builder().partitionValue(id).build();
     }
 
-
 }

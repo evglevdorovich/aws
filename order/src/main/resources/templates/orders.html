@@ -16,21 +16,23 @@
             <table class="shoppingCartTable">
                 <tr class="shoppingCartTableRow">
                     <th>id</th>
-                    <th>orderStatus</th>
+                    <th>paymentStatus</th>
+                    <th>warehouseStatus</th>
                     <th>totalAmount</th>
                     <th>shippingAddress</th>
                     <th>createdDate</th>
                 </tr>
                 <tr class="shoppingCartTableRow">
                     <td th:text="${order.id}"></td>
-                    <td th:text="${order.orderStatus}"></td>
+                    <td th:text="${order.paymentStatus}"></td>
+                    <td th:text="${order.warehouseStatus}"></td>
                     <td th:text="${order.totalAmount}"></td>
                     <td th:text="${order.shippingAddress}"></td>
                     <td th:text="${order.createdDate}"></td>
                 </tr>
             </table>
             <hr/>
-            <table class="shoppingCartTable" th:each="selectedProductList : ${order.selectedProductList}" style="margin-bottom: 10px;">
+            <table class="shoppingCartTable" th:each="selectedProductList : ${order.products}" style="margin-bottom: 10px;">
                 <tr class="shoppingCartTableRow">
                     <th>orderId</th>
                     <th>product title</th>
@@ -38,7 +40,7 @@
                 </tr>
                 <tr class="shoppingCartTableRow">
                     <td th:text="${order.id}"></td>
-                    <td th:text="${selectedProductList.product.title}"></td>
+                    <td th:text="${selectedProductList.name}"></td>
                     <td th:text="${selectedProductList.quantity}"></td>
                 </tr>
             </table>

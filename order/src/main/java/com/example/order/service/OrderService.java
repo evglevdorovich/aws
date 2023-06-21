@@ -1,5 +1,6 @@
 package com.example.order.service;
 
+import com.example.order.model.ApplicationUser;
 import com.example.order.model.Order;
 import com.example.order.model.OrderStatus;
 import com.example.order.model.OrderedProduct;
@@ -7,6 +8,7 @@ import com.example.order.repository.OrderRepository;
 import com.example.order.utils.ObjectMapperCollectionUtils;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 import software.amazon.awssdk.services.sns.SnsClient;
 import software.amazon.awssdk.services.sns.model.PublishRequest;
@@ -59,8 +61,10 @@ public class OrderService {
         orderRepository.updatePaymentStatus(orderId, orderStatus);
     }
 
-    public List<Order> findOrderByUserId(String userId) {
-        return orderRepository.findOrderByUserId(userId);
+    public List<Order> findOrdersByCurrentUser() {
+        var principal = (ApplicationUser) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        var userDetails = userService.loadUserByUsername(principal.getUsername());
+        return orderRepository.findOrderByUserId(userDetails.getId().toString());
     }
 
     public void sendFailoverSnsMessage(String message) {
