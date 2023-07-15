@@ -14,11 +14,11 @@ warehouse:
     withdrawal: _withdrawal
 
 eventResultNotification:
-  topicArn: arn:aws:sns:us-east-1:288453301076:EventResultListener.fifo
+  topicArn: arn:aws:sns:us-east-1:558462901474:EventResultListener.fifo
 
 queue:
   name: WarehouseQueue.fifo
-  waitTimeSeconds: 10
+  waitTimeSeconds: 9
   maxNumberOfMessages: 5
 
 server:
@@ -29,3 +29,7 @@ retry:
 
 event:
   source: warehouse
+
+notificationService:
+  warehouse:
+    topicArn: "arn:aws:sns:us-east-1:558462901474:WarehouseTopic.fifo"

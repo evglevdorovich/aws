@@ -32,7 +32,7 @@ public class PaymentListener {
     private final PaymentEventDispatcher paymentEventDispatcher;
     private final PaymentLogReasonChecker reasonChecker;
 
-    @Scheduled(cron = "*/5 * * * * *")
+    @Scheduled(cron = "*/10 * * * * *")
     public void onPaymentsReceived() {
         String queueUrl = getQueueUrl();
         List<Message> messages = receiveMessages(queueUrl);

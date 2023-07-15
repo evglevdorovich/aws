@@ -22,5 +22,4 @@ public class PaymentAccountLog {
     private String orderId;
     @Getter(onMethod = @__({@DynamoDbConvertedBy(BigDecimalStringConverter.class)}))
     private BigDecimal amountToDiff;
-
 }

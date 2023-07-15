@@ -66,6 +66,15 @@ public class WarehouseRepositoryDynamo implements WarehouseRepository {
         dynamoDbClient.transactWriteItems(transactWriteBuilder.build());
     }
 
+    @Override
+    public List<WarehouseView> getAll() {
+        var warehouseViewTable = getWarehouseViewDynamoDbTable();
+        return warehouseViewTable.scan().stream()
+                .flatMap(page -> page.items()
+                        .stream())
+                .toList();
+    }
+
     private DynamoDbTable<WarehouseView> getWarehouseViewDynamoDbTable() {
         var warehouseViewSchema = TableSchema.fromBean(WarehouseView.class);
         return dynamoDbClient

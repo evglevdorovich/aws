@@ -12,6 +12,8 @@ import software.amazon.awssdk.enhanced.dynamodb.Key;
 import software.amazon.awssdk.enhanced.dynamodb.TableSchema;
 import software.amazon.awssdk.enhanced.dynamodb.model.TransactWriteItemsEnhancedRequest;
 
+import java.math.BigDecimal;
+
 @RequiredArgsConstructor
 @Repository
 public class PaymentAccountRepositoryDynamo implements PaymentAccountRepository {
@@ -26,8 +28,10 @@ public class PaymentAccountRepositoryDynamo implements PaymentAccountRepository 
         var paymentPartitionKey = Key.builder()
                 .partitionValue(userId)
                 .build();
+        PaymentAccountView paymentAccountView = paymentAccountViewTable.getItem(paymentPartitionKey);
 
-        return paymentAccountViewTable.getItem(paymentPartitionKey);
+
+        return paymentAccountView == null ? new PaymentAccountView(userId, BigDecimal.ZERO) : paymentAccountView;
     }
 
     @Override

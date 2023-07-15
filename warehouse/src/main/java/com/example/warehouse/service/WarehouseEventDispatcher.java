@@ -1,7 +1,7 @@
 package com.example.warehouse.service;
 
 import com.example.warehouse.config.WarehouseEventResultNotificationConfig;
-import com.example.warehouse.exception.WarehouseResultFormatException;
+import com.example.warehouse.exception.WarehouseFormatException;
 import com.example.warehouse.model.WarehouseEventResult;
 import com.example.warehouse.status.WarehouseEventStatus;
 import com.fasterxml.jackson.core.JsonProcessingException;
@@ -59,7 +59,7 @@ public class WarehouseEventDispatcher {
             return objectWriter.writeValueAsString(eventResult);
         } catch (JsonProcessingException e) {
             log.warn("fail to process json with warehouseResult: {}", e.getMessage());
-            throw new WarehouseResultFormatException(e.getMessage());
+            throw new WarehouseFormatException(e.getMessage());
         }
     }
 }

@@ -30,7 +30,6 @@ public class CheckoutController {
         return "redirect:/orders";
     }
 
-
     @GetMapping("/orders")
     public String getOrders(Model model) {
         var orders = orderService.findOrdersByCurrentUser();

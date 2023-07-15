@@ -14,11 +14,11 @@ payment:
     receipt: _payment
 
 eventResultNotification:
-  topicArn: arn:aws:sns:us-east-1:288453301076:EventResultListener.fifo
+  topicArn: arn:aws:sns:us-east-1:558462901474:EventResultListener.fifo
 
 queue:
   name: Payment.fifo
-  waitTimeSeconds: 10
+  waitTimeSeconds: 9
   maxNumberOfMessages: 5
 
 server:
@@ -26,3 +26,6 @@ server:
 
 event:
   source: payment
+notificationService:
+  payments:
+    topicArn: "arn:aws:sns:us-east-1:558462901474:PaymentTopic.fifo"

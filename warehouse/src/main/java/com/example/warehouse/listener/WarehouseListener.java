@@ -31,7 +31,7 @@ public class WarehouseListener {
     private final WarehouseEventDispatcher warehouseEventDispatcher;
     private final WarehouseReasonChecker warehouseReasonChecker;
 
-    @Scheduled(cron = "*/5 * * * * *")
+    @Scheduled(cron = "*/10 * * * * *")
     public void onWarehouseMessagesReceived() {
         String queueUrl = getQueueUrl();
         List<Message> messages = receiveMessages(queueUrl);

@@ -1,9 +1,9 @@
 s3:
-  bucketName: dev-useast1-example
+  bucketName: dev-useast1
   objectName: products.json
 queue:
   replaceNotifier:
-    name: productsReplaceNotifier
+    name: productReplaceNotifier
     waitTimeSeconds: 0
     maxNumberOfMessages: 5
   orderProcessing:
@@ -13,13 +13,13 @@ queue:
 
 mail:
   topic:
-    arn: arn:aws:sns:us-east-1:288453301076:MyTopic
+    arn: arn:aws:sns:us-east-1:558462901474:MyTopic
 
 notificationService:
   payments:
-    topicArn: "arn:aws:sns:us-east-1:288453301076:PaymentTopic.fifo"
+    topicArn: "arn:aws:sns:us-east-1:558462901474:PaymentTopic.fifo"
   warehouse:
-    topicArn: "arn:aws:sns:us-east-1:288453301076:WarehouseTopic.fifo"
+    topicArn: "arn:aws:sns:us-east-1:558462901474:WarehouseTopic.fifo"
 
 warehouse:
   productTypeLimit: 12
@@ -32,11 +32,11 @@ db:
     paymentStatusAttributeName: paymentStatus
     userIdIndex: userId-index
 
-logging:
-  level:
-    org:
-      springframework:
-        web: INFO
+#logging:
+#  level:
+#    org:
+#      springframework:
+#        web: INFO
 
 postfix:
   payment:
@@ -49,10 +49,10 @@ postfix:
     withdrawal: _withdrawal
 
 spring:
-#  datasource:
-#    url: some
-#    username: postgres
-#    password: password
+  datasource:
+    url: ${DB_URL}
+    username: postgres
+    password: ${DB_PASSWORD}
   jpa:
     show-sql: true
 #    hibernate:

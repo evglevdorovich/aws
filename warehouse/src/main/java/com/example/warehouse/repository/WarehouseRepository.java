@@ -12,4 +12,6 @@ public interface WarehouseRepository {
     WarehouseView getViewById(String productId);
     Set<WarehouseView> getViewsByIds(List<String> productId);
     void updateWarehouseWithViews(Set<WarehouseView> views, Set<WarehouseLog> logs);
+
+    List<WarehouseView> getAll();
 }

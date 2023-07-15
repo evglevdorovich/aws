@@ -9,8 +9,12 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.retry.backoff.ExponentialRandomBackOffPolicy;
 import org.springframework.retry.policy.SimpleRetryPolicy;
 import org.springframework.retry.support.RetryTemplate;
+import org.springframework.web.servlet.config.annotation.CorsRegistry;
+import org.springframework.web.servlet.config.annotation.EnableWebMvc;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 @Configuration
+@EnableWebMvc
 public class ApplicationConfig {
     @Value("${retry.maxAttempts}")
     private Integer maxAttempts;
@@ -41,6 +45,17 @@ public class ApplicationConfig {
         retryTemplate.setRetryPolicy(retryPolicy);
 
         return retryTemplate;
+    }
+
+    @Bean
+    public WebMvcConfigurer corsConfigurer() {
+        return new WebMvcConfigurer() {
+            @Override
+            public void addCorsMappings(CorsRegistry registry) {
+                registry.addMapping("**").allowedOrigins("http://order:8080")
+                        .allowedMethods("PATCH", "OPTIONS");
+            }
+        };
     }
 
 }

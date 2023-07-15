@@ -11,17 +11,15 @@
 <body>
 <table class="shoppingCartTable">
     <tr class="shoppingCartTableRow">
-        <th>id</th>
         <th>product_id</th>
         <th>amount</th>
         <th>changed value</th>
     </tr>
     <tr th:each="warehouseProduct : ${warehouseProducts}" class="shoppingCartTableRow">
-        <td th:text="${warehouseProduct.id}"></td>
         <td th:text="${warehouseProduct.productId}"></td>
-        <td th:text="${warehouseProduct.amount}"></td>
-        <td><input th:id = "${warehouseProduct.id}"/></td>
-        <td><button name="change" type="button" th:attr="onclick=|changeAmountOfProducts('${warehouseProduct.id}','${warehouseProduct.productId}')|" >change amount</button></td>
+        <td th:text="${warehouseProduct.quantity}"></td>
+        <td><input th:id = "${warehouseProduct.productId}"/></td>
+        <td><button name="change" type="button" th:attr="onclick=|changeAmountOfProducts('${warehouseProduct.productId}')|" >change amount</button></td>
     </tr>
 </table>
 </body>

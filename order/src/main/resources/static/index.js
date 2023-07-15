@@ -1,4 +1,3 @@
-
 function sendProductToShoppingCart(product) {
 
     fetch("/shoppingCarts/products", {
@@ -8,6 +7,14 @@ function sendProductToShoppingCart(product) {
     })
         .then(r => console.log(r))
         .catch(e => console.error(e))
+}
+
+function generateUUID() {
+    return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
+        var r = Math.random() * 16 | 0,
+            v = c === 'x' ? r : (r & 0x3 | 0x8);
+        return v.toString(16);
+    });
 }
 
 async function sendUser(form) {
@@ -50,19 +57,32 @@ async function sendShippingAddress(form) {
     window.location.href = '//' + window.location.hostname + suffix;
 }
 
-async function changeAmountOfProducts(inputId, productId) {
-    let input = document.getElementById(inputId);
-    console.log(input.value, productId)
-    const product = {
-        productId: productId,
-        changedAmount: input.value
+async function changeAmountOfProducts(productId) {
+    let input = document.getElementById(productId);
+    const suffixToPatch = `:8080/warehouse`;
+    console.log(input.value, productId);
+    const productQuantity = parseInt(input.value);
+    let orderId = generateUUID();
+    if (productQuantity === 0) {
+        window.location.href = '//' + window.location.hostname + suffixToPatch;
+        return;
     }
-    await fetch("/warehouse", {
+
+    else if(productQuantity > 0) {
+        orderId += '_deposit'
+    }
+    else {
+        orderId += '_withdrawal'
+    }
+    const product = {
+        orderId: orderId,
+        quantity: Math.abs(productQuantity)
+    }
+    await fetch(`/products/${productId}`, {
         method: "PATCH",
         headers: {'Content-Type': 'application/json'},
         body: JSON.stringify(product)
     });
 
-    const suffix = ':8080/warehouse';
-    window.location.href = '//' + window.location.hostname + suffix;
+    window.location.href = '//' + window.location.hostname + suffixToPatch;
 }
