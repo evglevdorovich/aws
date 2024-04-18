@@ -1,0 +1,31 @@
+db:
+  payment:
+    tableName: PaymentAccount
+    partitionKey: userId
+    sortKey: orderId
+  paymentView:
+    tableName: PaymentAccountView
+    partitionKey: userId
+
+payment:
+  postfix:
+    deposit: _deposit
+    cancel: _cancel
+    receipt: _payment
+
+eventResultNotification:
+  topicArn: arn:aws:sns:us-east-1:558462901474:EventResultListener.fifo
+
+queue:
+  name: Payment.fifo
+  waitTimeSeconds: 9
+  maxNumberOfMessages: 5
+
+server:
+  port : 8081
+
+event:
+  source: payment
+notificationService:
+  payments:
+    topicArn: "arn:aws:sns:us-east-1:558462901474:PaymentTopic.fifo"

@@ -1,0 +1,35 @@
+db:
+  warehouse:
+    tableName: WarehouseLogs
+    partitionKey: productId
+    sortKey: orderId
+  warehouse-view:
+    tableName: WarehouseView
+    partitionKey: productId
+
+warehouse:
+  postfix:
+    deposit: _deposit
+    cancel: _cancel
+    withdrawal: _withdrawal
+
+eventResultNotification:
+  topicArn: arn:aws:sns:us-east-1:558462901474:EventResultListener.fifo
+
+queue:
+  name: WarehouseQueue.fifo
+  waitTimeSeconds: 9
+  maxNumberOfMessages: 5
+
+server:
+  port: 8082
+
+retry:
+  maxAttempts: 5
+
+event:
+  source: warehouse
+
+notificationService:
+  warehouse:
+    topicArn: "arn:aws:sns:us-east-1:558462901474:WarehouseTopic.fifo"

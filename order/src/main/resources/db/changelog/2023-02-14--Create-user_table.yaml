@@ -1,0 +1,24 @@
+databaseChangeLog:
+  - changeSet:
+      id: 2022-03-28--Create-users_table
+      author: evglevdorovich
+      createTable:
+        tableName: users
+        columns:
+          - column:
+              name: id
+              type: bigint
+              autoIncrement: true
+              constraints:
+                nullable: false
+                primaryKey: true
+                primaryKeyName: pk_users
+          - column:
+              name: password
+              type: varchar(255)
+          - column:
+              name: role
+              type: varchar(255)
+          - column:
+              name: username
+              type: varchar(255)
